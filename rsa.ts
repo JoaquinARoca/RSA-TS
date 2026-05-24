@@ -73,3 +73,8 @@ export function verifyMessage(publicKey: RsaPublicKey, message: string, signatur
 export function blindSign(privateKey: RsaPrivateKey, blindedMessage: bigint): bigint {
     return privateKey.sign(blindedMessage);
 }
+
+// RSA blind signature verification: checks that signature^e mod n === message.
+export function blindVerify(message: bigint, signature: bigint, pubKey: RsaPublicKey): boolean {
+    return pubKey.verify(signature) === message;
+}
