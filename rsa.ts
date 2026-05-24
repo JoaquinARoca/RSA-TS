@@ -64,3 +64,12 @@ export function signMessage(privateKey: RsaPrivateKey, message: string): bigint 
 export function verifyMessage(publicKey: RsaPublicKey, message: string, signature: bigint): boolean {
     return publicKey.verify(signature) === hashToBigInt(message);
 }
+
+
+/** Firma un mensaje ciego: RSA con la privada. Devuelve la firma como bigint. */
+
+// RSA blind signature: signs the blinded message without seeing the original value.
+// Client must unblind the result: s = blindSig * modInv(r, n) mod n
+export function blindSign(privateKey: RsaPrivateKey, blindedMessage: bigint): bigint {
+    return privateKey.sign(blindedMessage);
+}
